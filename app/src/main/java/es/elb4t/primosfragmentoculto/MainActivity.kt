@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Long
 
 
@@ -44,11 +45,14 @@ class MainActivity : AppCompatActivity(), FragmentOculto.TaskListener {
 
     override fun onProgressUpdate(progreso: Double) {
         resultField.setText(String.format("%.1f%% completado", progreso * 100))
+        progressResult.progress = (progreso * 100).toInt()
     }
 
     override fun onPostExecute(resultado: Boolean) {
         resultField.setText(resultado.toString() + "")
+        progressResult.progress = 100
         primecheckbutton.text = "¿ES PRIMO?"
+        primecheckbutton.isEnabled = true
     }
 
     override fun onCancelled() {
